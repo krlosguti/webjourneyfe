@@ -1,0 +1,102 @@
+
+
+<span class="titleInput">&nbsp;      </span>
+<div class="container mt-5 text-center">
+
+  <table>
+    <tr>
+      <th colspan="4"><h2 class="mb-3">Find Journey!</h2></th>
+    </tr>
+    <tr>
+      <th>Origin</th>
+      <th>Destination</th>
+      <th>Coin</th>
+      <th>Trip</th>
+    </tr>
+    <tr>
+      <td>
+        <select [(ngModel)]="selectedOrigin" class="form-control" (change)="onChange()">
+            <option *ngFor="let data of allCities" [ngValue]="data.iata">
+              {{data.iata}} - {{ data.airport }}
+            </option>
+        </select>
+      </td>
+      <td>
+        <select [(ngModel)]="selectedDestination" class="form-control" (change)="onChange()">
+          <option *ngFor="let data of allCities" [ngValue]="data.iata">
+            {{data.iata}} - {{ data.airport }}
+          </option>
+        </select>
+      </td>
+      <td>
+        <select [(ngModel)]="selectedCoin" class="form-control" (change)="onChange()">
+          <option *ngFor="let data of allCoins" [ngValue]="data.Name">
+            {{data.Name}} - {{ data.Description }}
+          </option>
+        </select>
+      </td>
+      <td>
+        <select [(ngModel)]="selectedTrip" class="form-control" (change)="onChange()">
+          <option *ngFor="let data of Trip" [ngValue]="data">
+            {{data}}
+          </option>
+        </select>
+      </td>
+    </tr>
+  </table>
+
+
+</div>
+<div >
+  <button type="button" class="btn btn-primary m-2 float-end" data-bs-toggle="modal" data-bs-target="#exampleModal"
+  (click)="addClick()">
+  Find Journey!
+</button>
+</div>
+
+
+<div class="journey">
+  <div><h4>Outbound flights</h4></div>
+  <div *ngFor="let journey of allJourneys">
+    <table>
+      <tr>
+        <th>Number of scales: {{journey.flights.length - 1}} </th>
+        <th colspan="2">Total Price: {{journey.price | currency}}</th>
+      </tr>
+      <tr>
+        <td><h5>Origin</h5></td>
+        <td><h5>Destination</h5></td>
+        <td><h5>Partial Price</h5></td>
+      </tr>
+    <tr *ngFor="let flight of journey.flights">
+      <td>{{flight.origin}}</td>
+      <td>{{flight.destination}}</td>
+      <td>{{flight.priceCoin | currency}}</td>
+    </tr>
+      </table>
+      <br>
+  </div>
+  <hr>
+  <div><h4>Return flights</h4></div>
+  <div *ngFor="let journey of allJourneysBack">
+    <table>
+      <tr>
+        <th>Number of scales: {{journey.flights.length - 1}} </th>
+        <th colspan="2">Total Price: {{journey.price | currency}}</th>
+      </tr>
+      <tr>
+        <td><h5>Origin</h5></td>
+        <td><h5>Destination</h5></td>
+        <td><h5>Partial Price</h5></td>
+      </tr>
+    <tr *ngFor="let flight of journey.flights">
+      <td>{{flight.origin}}</td>
+      <td>{{flight.destination}}</td>
+      <td>{{flight.priceCoin | currency}}</td>
+    </tr>
+      </table>
+      <br>
+  </div>
+  </div>
+
+
